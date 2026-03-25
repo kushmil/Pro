@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AnshuRajhans 🫟 | Gen Z Dev</title>
+    
+    <!-- Dynamic Manifest Link -->
+    <link id="manifest-link" rel="manifest">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kavoon&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+
+    <!-- IziToast CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+    
+    <style>
+        /* CSS Variables & Theme */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #1d1d1f;
+            --text-sec: #86868b;
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --header-border: rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --card-radius: 24px;
+            
+            /* Light Mode Bento Card Colors (Soft Pastels) */
+            --c-blue: #E8F0FE;
+            --c-mint: #E6F4EA;
+            --c-orange: #FEF7E0;
+            --c-lavender: #F3E8FF;
+            --c-peach: #FCE8E6;
+            --c-yellow: #FFF8E1;
+            --c-cyan: #E0F7FA;
+            --c-red: #FDEDED;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #000000; /* Pure AMOLED Black */
+            --text-main: #f5f5f7;
+            --text-sec: #a1a1a6;
+            --header-bg: rgba(0, 0, 0, 0.85);
+            --header-border: rgba(255, 255, 255, 0.05);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            
+            /* Dark Mode Bento Card Colors (Dark Pastels) */
+            --c-blue: #081324;
+            --c-mint: #06170d;
+            --c-orange: #1a1202;
+            --c-lavender: #130722;
+            --c-peach: #1f0b08;
+            --c-yellow: #1c1501;
+            --c-cyan: #04161a;
+            --c-red: #1c0606;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            color: inherit;
+        }
+
+        .kavoon {
+            font-family: 'Kavoon', cursive;
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #splash-text {
+            font-size: 3rem;
+            color: var(--text-main);
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            animation: splashAnim 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes splashAnim {
+            0% { opacity: 0; transform: translateY(20px) scale(0.9); filter: blur(10px); }
+            50% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--header-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 1.4rem;
+            font-weight: normal;
+        }
+
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .icon-btn:active {
+            background-color: rgba(128, 128, 128, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            padding: 80px 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Banner */
+        .banner {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            background-color: var(--c-blue);
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .bento-card {
+            border-radius: var(--card-radius);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:active {
+            transform: scale(0.96);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-sec);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Card Specific Colors */
+        .card-projects { background-color: var(--c-blue); grid-column: span 2; }
+        .card-edu { background-color: var(--c-mint); grid-row: span 2; }
+        .card-contact { background-color: var(--c-orange); }
+        .card-settings { background-color: var(--c-lavender); }
+        .card-privacy { background-color: var(--c-peach); }
+        .card-terms { background-color: var(--c-yellow); }
+        .card-chatbot { background-color: var(--c-cyan); grid-column: span 2; }
+        .card-404 { background-color: var(--c-red); }
+
+        /* Dynamic Page / SPA System */
+        #page-container {
+            position: fixed;
+            inset: 0;
+            background-color: var(--bg-color);
+            z-index: 200;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #page-container.active {
+            transform: translateX(0);
+        }
+
+        .page-header {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--header-border);
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            flex-shrink: 0;
+        }
+
+        .page-header h2 {
+            font-size: 1.2rem;
+            margin-left: 16px;
+            font-weight: 600;
+        }
+
+        .page-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Typography & Layouts for Inner Pages */
+        .page-title { font-size: 2rem; margin-bottom: 16px; font-weight: 700; }
+        .page-text { font-size: 1rem; color: var(--text-sec); line-height: 1.6; margin-bottom: 24px; }
+        
+        .list-card {
+            background-color: var(--header-bg);
+            border: 1px solid var(--header-border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .list-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .primary-btn {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+            font-size: 0.9rem;
+        }
+        .primary-btn:active { transform: scale(0.95); }
+        .outline-btn {
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        /* Chatbot UI */
+        .chat-container { display: flex; flex-direction: column; height: 100%; }
+        .chat-messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; }
+        .chat-bubble { max-width: 80%; padding: 12px 16px; border-radius: 20px; font-size: 0.95rem; line-height: 1.4; }
+        .chat-bot { background-color: var(--c-cyan); color: var(--text-main); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-user { background-color: var(--text-main); color: var(--bg-color); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-input-area { display: flex; gap: 12px; padding-top: 16px; border-top: 1px solid var(--header-border); margin-top: auto;}
+        .chat-input-area input { flex: 1; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--header-border); background-color: var(--bg-color); color: var(--text-main); font-family: inherit; font-size: 1rem; outline: none; }
+
+        /* Hamburger Drawer */
+        #drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+        }
+        #drawer {
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            width: 280px;
+            background-color: var(--bg-color);
+            z-index: 1001;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        #drawer.active { transform: translateX(0); }
+        #drawer-overlay.active { opacity: 1; visibility: visible; }
+        .drawer-item {
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid var(--header-border);
+        }
+
+        /* 404 Center */
+        .center-msg {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+            text-align: center;
+        }
+        .center-msg h1 { font-size: 6rem; line-height: 1; color: var(--c-red); margin-bottom: 10px; }
+
+        /* Gen Z Quote box */
+        .genz-quote {
+            background: linear-gradient(135deg, var(--c-mint), var(--c-cyan));
+            padding: 20px;
+            border-radius: 28px;
+            margin: 28px 0 20px;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: var(--shadow);
+        }
+        .skill-badge {
+            display: inline-block;
+            background: var(--text-main);
+            color: var(--bg-color);
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <h1 id="splash-text" class="kavoon">AnshuRajhans 🫟</h1>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <button class="icon-btn" onclick="toggleDrawer()">
+            <span class="material-symbols-rounded">menu</span>
+        </button>
+        <div class="header-title kavoon">AnshuRajhans 🫟</div>
+        <button class="icon-btn" onclick="toggleTheme()">
+            <span class="material-symbols-rounded" id="theme-icon">dark_mode</span>
+        </button>
+    </header>
+
+    <!-- Hamburger Drawer -->
+    <div id="drawer-overlay" onclick="toggleDrawer()"></div>
+    <div id="drawer">
+        <div class="kavoon" style="font-size: 1.5rem; margin-bottom: 20px;">AnshuRajhans</div>
+        <button class="drawer-item" onclick="navigate('home')"><span class="material-symbols-rounded">home</span> Home</button>
+        <button class="drawer-item" onclick="navigate('projects')"><span class="material-symbols-rounded">work</span> Projects</button>
+        <button class="drawer-item" onclick="navigate('education')"><span class="material-symbols-rounded">school</span> Education</button>
+        <button class="drawer-item" onclick="navigate('contact')"><span class="material-symbols-rounded">mail</span> Contact</button>
+        <button class="drawer-item" onclick="navigate('chatbot')"><span class="material-symbols-rounded">smart_toy</span> Chatbot</button>
+        <button class="drawer-item" onclick="navigate('settings')"><span class="material-symbols-rounded">settings</span> Settings</button>
+    </div>
+
+    <!-- Main Homepage Content -->
+    <main id="home-view">
+        <!-- Banner -->
+        <div class="banner">
+            <img src="banner.jpg" alt="Banner" onerror="handleImgError(this, 'var(--c-blue)')">
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="bento-grid">
+            <button class="bento-card card-projects" onclick="navigate('projects')">
+                <span class="material-symbols-rounded card-icon">work</span>
+                <div class="card-title">Projects</div>
+                <div class="card-desc">GameHub & more — live projects that hit different.</div>
+            </button>
+            <button class="bento-card card-edu" onclick="navigate('education')">
+                <span class="material-symbols-rounded card-icon">school</span>
+                <div class="card-title">Education</div>
+                <div class="card-desc">SB Roy High School → Graduation (Pol Sci) + real talk: skills > degree.</div>
+            </button>
+            <button class="bento-card card-contact" onclick="navigate('contact')">
+                <span class="material-symbols-rounded card-icon">mail</span>
+                <div class="card-title">Contact</div>
+                <div class="card-desc">Get in touch via email or social.</div>
+            </button>
+            <button class="bento-card card-chatbot" onclick="navigate('chatbot')">
+                <span class="material-symbols-rounded card-icon">smart_toy</span>
+                <div class="card-title">AI Chatbot</div>
+                <div class="card-desc">Ask about portfolio, skills, or just vibe.</div>
+            </button>
+            <button class="bento-card card-settings" onclick="navigate('settings')">
+                <span class="material-symbols-rounded card-icon">settings</span>
+                <div class="card-title">Settings</div>
+                <div class="card-desc">App preferences.</div>
+            </button>
+            <button class="bento-card card-privacy" onclick="navigate('privacy')">
+                <span class="material-symbols-rounded card-icon">shield</span>
+                <div class="card-title">Privacy</div>
+                <div class="card-desc">Data policy.</div>
+            </button>
+            <button class="bento-card card-terms" onclick="navigate('terms')">
+                <span class="material-symbols-rounded card-icon">gavel</span>
+                <div class="card-title">Terms</div>
+                <div class="card-desc">Conditions of use.</div>
+            </button>
+            <button class="bento-card card-404" onclick="navigate('404')">
+                <span class="material-symbols-rounded card-icon">error</span>
+                <div class="card-title">404 Page</div>
+                <div class="card-desc">Test error handling.</div>
+            </button>
+        </div>
+    </main>
+
+    <!-- SPA Page Container -->
+    <div id="page-container">
+        <div class="page-header">
+            <button class="icon-btn" onclick="closePage()">
+                <span class="material-symbols-rounded">arrow_back</span>
+            </button>
+            <h2 id="page-header-title">Page</h2>
+        </div>
+        <div class="page-content" id="page-content">
+            <!-- Dynamic Content Injected Here -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+
+    <script>
+        /* --- Initialization & Splash Screen --- */
+        document.addEventListener("DOMContentLoaded", () => {
+            try {
+                initTheme();
+                initPWA();
+                setTimeout(() => {
+                    hideSplash();
+                }, 2000);
+            } catch (e) {
+                console.warn("Initialization error", e);
+                hideSplash();
+            }
+            if (!navigator.onLine) showOfflineToast();
+        });
+        setTimeout(hideSplash, 3000);
+        function hideSplash() {
+            const splash = document.getElementById('splash-screen');
+            if (splash) {
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+            }
+        }
+
+        /* --- Theme Management --- */
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+        function toggleTheme() {
+            const current = document.body.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+        function updateThemeIcon(theme) {
+            document.getElementById('theme-icon').textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
+        }
+
+        function toggleDrawer() {
+            document.getElementById('drawer').classList.toggle('active');
+            document.getElementById('drawer-overlay').classList.toggle('active');
+        }
+
+        function handleImgError(img, colorVar) {
+            img.onerror = null;
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><rect width="100%" height="100%" fill="#e0e0e0"/><text x="50%" y="50%" fill="#888" font-family="sans-serif" font-size="14" text-anchor="middle" dominant-baseline="middle">✨ Banner</text></svg>`;
+            img.src = 'data:image/svg+xml;base64,' + btoa(svg);
+        }
+
+        /* --- Navigation & SPA Routing --- */
+        function navigate(pageId) {
+            if (pageId === 'home') {
+                closePage();
+                document.getElementById('drawer').classList.remove('active');
+                document.getElementById('drawer-overlay').classList.remove('active');
+                return;
+            }
+            const pageTitle = pageId.charAt(0).toUpperCase() + pageId.slice(1);
+            document.getElementById('page-header-title').textContent = pageTitle.replace('404', 'Error 404');
+            const contentDiv = document.getElementById('page-content');
+            contentDiv.innerHTML = pageRenders[pageId] ? pageRenders[pageId]() : pageRenders['404']();
+            document.getElementById('page-container').classList.add('active');
+            document.getElementById('drawer').classList.remove('active');
+            document.getElementById('drawer-overlay').classList.remove('active');
+            if (pageId === 'chatbot') initChatbot();
+        }
+        function closePage() {
+            document.getElementById('page-container').classList.remove('active');
+        }
+
+        /* --- Updated Page Renderers (Education + Projects GenZ style + Contact updated) --- */
+        const pageRenders = {
+            projects: () => `
+                <h1 class="page-title">🚀 Projects that slap</h1>
+                <p class="page-text">Real builds, real vibes. No cap — these are live & breathing.</p>
+                
+                <div class="list-card" style="flex-wrap: wrap;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; width: 100%;">
+                        <div style="background: var(--c-cyan); width: 80px; height: 80px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🎮</div>
+                        <div style="flex:1">
+                            <h3>GameHub 🔥</h3>
+                            <p class="card-desc" style="margin-top:4px;">Next-gen gaming community platform — smooth UI, modern stack, live now.</p>
+                            <a href="https://vipweb.shop/" target="_blank" rel="noopener noreferrer" class="primary-btn" style="padding: 8px 20px; margin-top: 12px; display: inline-block;">🌐 Visit GameHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-card" style="flex-wrap: wrap;">
+                    <div style="display: flex; gap: 16px; width: 100%; align-items: center;">
+                        <div style="background: var(--c-orange); width: 80px; height: 80px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🫟</div>
+                        <div>
+                            <h3>AnshuRajhans PWA</h3>
+                            <p class="card-desc">This very portfolio — offline-ready, themable, bento UI, AI chatbot. Pure flex.</p>
+                            <button class="outline-btn" style="margin-top: 10px;" onclick="toast('You already in it, bestie ✨')">Explore now</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="page-text" style="font-size: 0.9rem; margin-top: 12px;">💡 More projects loading... stay tuned, fam.</p>
+            `,
+            education: () => `
+                <h1 class="page-title">📚 Edu timeline (real one)</h1>
+                <p class="page-text">Academic journey + a lil' reality check about web dev.</p>
+                
+                <div style="position: relative; padding-left: 24px; border-left: 3px solid var(--text-main);">
+                    <div style="margin-bottom: 32px;">
+                        <div style="position: absolute; left: -9px; width: 14px; height: 14px; background: var(--text-main); border-radius: 50%;"></div>
+                        <h3>🎓 Matriculation (10th)</h3>
+                        <p style="color: var(--text-sec); font-weight: 500;">SB Roy High School, Simran, Jharkhand</p>
+                        <p style="font-size:0.9rem;">Completed with excellence — foundation mode: ON.</p>
+                    </div>
+                    <div style="margin-bottom: 32px;">
+                        <div style="position: absolute; left: -9px; width: 14px; height: 14px; background: var(--text-main); border-radius: 50%;"></div>
+                        <h3>📖 Intermediate (12th)</h3>
+                        <p style="color: var(--text-sec);">SB Roy +2 School, Simran, Deoghar (JAC Ranchi)</p>
+                        <p style="font-size:0.9rem;">Higher secondary, laid the discipline.</p>
+                    </div>
+                    <div style="margin-bottom: 32px;">
+                        <div style="position: absolute; left: -9px; width: 14px; height: 14px; background: var(--text-main); border-radius: 50%;"></div>
+                        <h3>🏛️ Graduation</h3>
+                        <p style="color: var(--text-sec);">Deoghar College, Deoghar (SKMU, Dumka) — Political Science</p>
+                        <p style="font-size:0.9rem;">Degree in Pol Sci, but brain wired for code 🧠⚡</p>
+                    </div>
+                </div>
+                
+                <!-- Gen Z Style Skill > Degree Section -->
+                <div class="genz-quote">
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <span style="font-size: 2rem;">🧢</span>
+                        <div>
+                            <h3 style="font-weight: 800;">no cap: web dev doesn't need a degree.</h3>
+                            <p style="margin-top: 8px; font-weight: 500;">It needs <strong>skills</strong>, and i got 'em. Built this whole PWA, GameHub, and more — self-taught grind, real portfolio energy. <br> 
+                            <span style="display: inline-block; margin-top: 12px;">✨ Skill > Degree, periodt. ✨</span></p>
+                            <div style="margin-top: 12px;">
+                                <span class="skill-badge">⚡ HTML/CSS</span>
+                                <span class="skill-badge">🔥 JavaScript</span>
+                                <span class="skill-badge">📱 PWA Expert</span>
+                                <span class="skill-badge">🎨 UI/UX sense</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="page-text" style="font-size:0.85rem;">💅 degree in political science? yes. coding like a pro? also yes. no limits.</p>
+            `,
+            contact: () => `
+                <h1 class="page-title">👾 Slide into DMs</h1>
+                <p class="page-text">collab, freelance, or just wanna vibe — hmu.</p>
+                <div style="background: var(--header-bg); padding: 24px; border-radius: var(--card-radius); box-shadow: var(--shadow);">
+                    <h3>Anshu Rajhans</h3>
+                    <p style="margin: 10px 0; color: var(--text-sec);">
+                        <span class="material-symbols-rounded" style="vertical-align: middle;">mail</span> 
+                        <a href="mailto:vipwebff@gmail.com" style="color: var(--text-main); text-decoration: none; border-bottom: 1px dotted var(--text-sec);">vipwebff@gmail.com</a>
+                    </p>
+                    <p style="margin: 10px 0; color: var(--text-sec);">
+                        <span class="material-symbols-rounded" style="vertical-align: middle;">photo_camera</span> 
+                        <a href="https://instagram.com/anshurajhans" target="_blank" rel="noopener noreferrer" style="color: var(--text-main); text-decoration: none; border-bottom: 1px dotted var(--text-sec);">@anshurajhans</a>
+                    </p>
+                    <button class="primary-btn" onclick="window.open('https://instagram.com/anshurajhans', '_blank')">
+                        📸 Send a vibe → (Instagram)
+                    </button>
+                </div>
+            `,
+            settings: () => `
+                <h1 class="page-title">⚙️ Settings</h1>
+                <p class="page-text">Customize your experience.</p>
+                <div class="list-card" style="justify-content: space-between; cursor: pointer;" onclick="toggleTheme()">
+                    <div style="display:flex; align-items:center; gap:12px;"><span class="material-symbols-rounded">palette</span><h3>Dark/Light Mode</h3></div>
+                    <span class="material-symbols-rounded">chevron_right</span>
+                </div>
+                <div class="list-card" style="justify-content: space-between; cursor: pointer;" onclick="clearCache()">
+                    <div style="display:flex; align-items:center; gap:12px;"><span class="material-symbols-rounded">delete</span><h3>Clear Cache & Reset</h3></div>
+                </div>
+                <div class="list-card" style="justify-content: space-between; cursor: pointer;" onclick="promptInstall()">
+                    <div style="display:flex; align-items:center; gap:12px;"><span class="material-symbols-rounded">download</span><h3>Install as App (PWA)</h3></div>
+                </div>
+            `,
+            privacy: () => `
+                <h1 class="page-title">🔒 Privacy? Locked.</h1>
+                <p class="page-text">No data selling, no creepy tracking. Only localStorage for theme.</p>
+                <h3>Zero BS Policy</h3>
+                <p class="page-text">Everything stays on your device. This portfolio is 100% client-side.</p>
+            `,
+            terms: () => `
+                <h1 class="page-title">📜 Terms of use</h1>
+                <p class="page-text">Don't be weird, give credit if u steal code, and enjoy the vibes.</p>
+                <h3>Intellectual property</h3>
+                <p class="page-text">Built by Anshu Rajhans — inspired by minimalism & GenZ culture.</p>
+            `,
+            chatbot: () => `
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-bubble chat-bot">Yo! I'm Anshu's AI homie. Ask me about his skills, projects, or just say hi 👋</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="handleChatKey(event)">
+                        <button class="icon-btn" style="background:var(--text-main); color:var(--bg-color);" onclick="sendChatMessage()">
+                            <span class="material-symbols-rounded">send</span>
+                        </button>
+                    </div>
+                </div>
+            `,
+            '404': () => `
+                <div class="center-msg">
+                    <h1>404</h1>
+                    <h2 style="margin-bottom:20px;">Page not found. maybe lost in the metaverse?</h2>
+                    <button class="primary-btn" onclick="closePage()">Go back home</button>
+                </div>
+            `
+        };
+
+        function toast(message) {
+            iziToast.show({
+                title: '',
+                message: message,
+                position: 'bottomCenter',
+                theme: document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light',
+                timeout: 2500
+            });
+        }
+
+        function clearCache() {
+            Swal.fire({
+                title: 'Clear cache?',
+                text: "This will reset theme and preferences.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, clear',
+                background: getComputedStyle(document.body).getPropertyValue('--bg-color'),
+                color: getComputedStyle(document.body).getPropertyValue('--text-main')
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.clear();
+                    Swal.fire('Cleared!', 'App data reset. Reloading...', 'success').then(() => location.reload());
+                }
+            });
+        }
+
+        /* Chatbot */
+        const botResponses = [
+            "Anshu's main flex: GameHub → vipweb.shop 🔥",
+            "He's self-taught, degree in Pol Sci but codes like a pro.",
+            "Bento UI, PWA ready, dark mode — all from scratch.",
+            "No cap, skills speak louder than degrees 💯",
+            "He did 10th & 12th from SB Roy, then Graduation from Deoghar College.",
+            "Ask about his projects! GameHub is live.",
+            "He believes: Skill > Degree, periodt.",
+            "Contact him via email vipwebff@gmail.com or IG @anshurajhans ✨"
+        ];
+        function initChatbot() { setTimeout(() => { let inp = document.getElementById('chat-input'); if(inp) inp.focus(); }, 200); }
+        function handleChatKey(e) { if (e.key === 'Enter') sendChatMessage(); }
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if(!msg) return;
+            appendChat(msg, 'user');
+            input.value = '';
+            setTimeout(() => {
+                const reply = botResponses[Math.floor(Math.random() * botResponses.length)];
+                appendChat(reply, 'bot');
+            }, 800);
+        }
+        function appendChat(text, sender) {
+            const container = document.getElementById('chat-messages');
+            if(!container) return;
+            const bubble = document.createElement('div');
+            bubble.className = `chat-bubble chat-${sender}`;
+            bubble.textContent = text;
+            container.appendChild(bubble);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        /* PWA Manifest & Service Worker */
+        let deferredPrompt;
+        function initPWA() {
+            const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192"><rect width="192" height="192" fill="#1d1d1f"/><text x="96" y="105" font-family="sans-serif" font-size="80" fill="#ffffff" text-anchor="middle">🫟</text></svg>`;
+            const iconUrl = 'data:image/svg+xml;base64,' + btoa(iconSvg);
+            const manifest = {
+                name: "AnshuRajhans Dev",
+                short_name: "AnshuPortfolio",
+                start_url: ".",
+                display: "standalone",
+                background_color: "#ffffff",
+                theme_color: "#000000",
+                icons: [{ src: iconUrl, sizes: "192x192", type: "image/svg+xml" }]
+            };
+            const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
+            document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
+            const swCode = `const CACHE='anshu-pwa-v2'; self.addEventListener('install',e=>self.skipWaiting()); self.addEventListener('activate',e=>e.waitUntil(clients.claim())); self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(f=>caches.open(CACHE).then(c=>{if(e.request.method==='GET')c.put(e.request,f.clone());return f;})))})});`;
+            const swBlob = new Blob([swCode], {type: 'application/javascript'});
+            if ('serviceWorker' in navigator) navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(e=>console.log);
+            window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
+            window.addEventListener('offline', showOfflineToast);
+            window.addEventListener('online', () => iziToast.success({title: 'Online', message: 'Back online!', position: 'bottomCenter'}));
+        }
+        function showOfflineToast() { iziToast.warning({title: 'Offline', message: 'You’re offline but app still works ✨', position: 'bottomCenter', timeout: 4000}); }
+        function promptInstall() {
+            if(deferredPrompt) {
+                Swal.fire({title: 'Install App?', text: 'Add to home screen for full PWA experience.', icon: 'info', showCancelButton: true, confirmButtonText: 'Install'}).then(res=>{
+                    if(res.isConfirmed){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; }); }
+                });
+            } else { Swal.fire('Already installed', 'PWA is ready or browser not supported', 'info'); }
+        }
+    </script>
+</body>
+</html>
