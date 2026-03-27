@@ -2,811 +2,362 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AnshuRajhans 🫟 | Gen Z Dev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     
-    <!-- Dynamic Manifest Link -->
-    <link id="manifest-link" rel="manifest">
-    
+    <!-- PWA Meta Tags -->
+    <title>Anshu Rajhans · Dev & Game Creator</title>
+    <meta name="description" content="Anshu Rajhans — Full-stack developer, PWA expert, and creator of 11+ games. Degree is just a paper, skills are the real flex.">
+    <meta name="theme-color" content="#f14b40" id="meta-theme-color">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2YxNGI0MCIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BUjwvdGV4dD48L3N2Zz4=">
+    <link id="pwa-manifest" rel="manifest" href="">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kavoon&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Material Symbols -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- IziToast CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
-    
-    <style>
-        /* CSS Variables & Theme */
-        :root {
-            --bg-color: #ffffff;
-            --text-main: #1d1d1f;
-            --text-sec: #86868b;
-            --header-bg: rgba(255, 255, 255, 0.85);
-            --header-border: rgba(0, 0, 0, 0.05);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            --card-radius: 24px;
-            
-            /* Light Mode Bento Card Colors (Soft Pastels) */
-            --c-blue: #E8F0FE;
-            --c-mint: #E6F4EA;
-            --c-orange: #FEF7E0;
-            --c-lavender: #F3E8FF;
-            --c-peach: #FCE8E6;
-            --c-yellow: #FFF8E1;
-            --c-cyan: #E0F7FA;
-            --c-red: #FDEDED;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #000000; /* Pure AMOLED Black */
-            --text-main: #f5f5f7;
-            --text-sec: #a1a1a6;
-            --header-bg: rgba(0, 0, 0, 0.85);
-            --header-border: rgba(255, 255, 255, 0.05);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            
-            /* Dark Mode Bento Card Colors (Dark Pastels) */
-            --c-blue: #081324;
-            --c-mint: #06170d;
-            --c-orange: #1a1202;
-            --c-lavender: #130722;
-            --c-peach: #1f0b08;
-            --c-yellow: #1c1501;
-            --c-cyan: #04161a;
-            --c-red: #1c0606;
-        }
-
-        /* Reset & Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
-        }
-
-        button {
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-family: inherit;
-            color: inherit;
-        }
-
-        .kavoon {
-            font-family: 'Kavoon', cursive;
-        }
-
-        /* Splash Screen */
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            background-color: var(--bg-color);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        #splash-text {
-            font-size: 3rem;
-            color: var(--text-main);
-            opacity: 0;
-            transform: translateY(20px) scale(0.9);
-            animation: splashAnim 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-
-        @keyframes splashAnim {
-            0% { opacity: 0; transform: translateY(20px) scale(0.9); filter: blur(10px); }
-            50% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background-color: var(--header-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--header-border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 100;
-        }
-
-        .header-title {
-            font-size: 1.4rem;
-            font-weight: normal;
-        }
-
-        .icon-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-
-        .icon-btn:active {
-            background-color: rgba(128, 128, 128, 0.2);
-        }
-
-        /* Main Content */
-        main {
-            padding: 80px 20px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Banner */
-        .banner {
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: var(--card-radius);
-            overflow: hidden;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow);
-            background-color: var(--c-blue);
-        }
-
-        .banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Bento Grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        @media (min-width: 768px) {
-            .bento-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .bento-card {
-            border-radius: var(--card-radius);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
-            cursor: pointer;
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .bento-card:active {
-            transform: scale(0.96);
-        }
-
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
-        }
-
-        .card-title {
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .card-desc {
-            font-size: 0.85rem;
-            color: var(--text-sec);
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Card Specific Colors */
-        .card-projects { background-color: var(--c-blue); grid-column: span 2; }
-        .card-edu { background-color: var(--c-mint); grid-row: span 2; }
-        .card-contact { background-color: var(--c-orange); }
-        .card-settings { background-color: var(--c-lavender); }
-        .card-privacy { background-color: var(--c-peach); }
-        .card-terms { background-color: var(--c-yellow); }
-        .card-chatbot { background-color: var(--c-cyan); grid-column: span 2; }
-        .card-404 { background-color: var(--c-red); }
-
-        /* Dynamic Page / SPA System */
-        #page-container {
-            position: fixed;
-            inset: 0;
-            background-color: var(--bg-color);
-            z-index: 200;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        #page-container.active {
-            transform: translateX(0);
-        }
-
-        .page-header {
-            height: 60px;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            border-bottom: 1px solid var(--header-border);
-            background-color: var(--header-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            flex-shrink: 0;
-        }
-
-        .page-header h2 {
-            font-size: 1.2rem;
-            margin-left: 16px;
-            font-weight: 600;
-        }
-
-        .page-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 24px;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* Typography & Layouts for Inner Pages */
-        .page-title { font-size: 2rem; margin-bottom: 16px; font-weight: 700; }
-        .page-text { font-size: 1rem; color: var(--text-sec); line-height: 1.6; margin-bottom: 24px; }
-        
-        .list-card {
-            background-color: var(--header-bg);
-            border: 1px solid var(--header-border);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: var(--shadow);
-        }
-
-        .list-card img {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
-            object-fit: cover;
-        }
-
-        .primary-btn {
-            background-color: var(--text-main);
-            color: var(--bg-color);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: transform 0.2s;
-            margin-top: 10px;
-            display: inline-block;
-            text-decoration: none;
-            border: none;
-            font-size: 0.9rem;
-        }
-        .primary-btn:active { transform: scale(0.95); }
-        .outline-btn {
-            background: transparent;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-
-        /* Chatbot UI */
-        .chat-container { display: flex; flex-direction: column; height: 100%; }
-        .chat-messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; }
-        .chat-bubble { max-width: 80%; padding: 12px 16px; border-radius: 20px; font-size: 0.95rem; line-height: 1.4; }
-        .chat-bot { background-color: var(--c-cyan); color: var(--text-main); align-self: flex-start; border-bottom-left-radius: 4px; }
-        .chat-user { background-color: var(--text-main); color: var(--bg-color); align-self: flex-end; border-bottom-right-radius: 4px; }
-        .chat-input-area { display: flex; gap: 12px; padding-top: 16px; border-top: 1px solid var(--header-border); margin-top: auto;}
-        .chat-input-area input { flex: 1; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--header-border); background-color: var(--bg-color); color: var(--text-main); font-family: inherit; font-size: 1rem; outline: none; }
-
-        /* Hamburger Drawer */
-        #drawer-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
-        }
-        #drawer {
-            position: fixed;
-            top: 0; left: 0; bottom: 0;
-            width: 280px;
-            background-color: var(--bg-color);
-            z-index: 1001;
-            transform: translateX(-100%);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        #drawer.active { transform: translateX(0); }
-        #drawer-overlay.active { opacity: 1; visibility: visible; }
-        .drawer-item {
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 12px 0;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            border-bottom: 1px solid var(--header-border);
-        }
-
-        /* 404 Center */
-        .center-msg {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 60vh;
-            text-align: center;
-        }
-        .center-msg h1 { font-size: 6rem; line-height: 1; color: var(--c-red); margin-bottom: 10px; }
-
-        /* Gen Z Quote box */
-        .genz-quote {
-            background: linear-gradient(135deg, var(--c-mint), var(--c-cyan));
-            padding: 20px;
-            border-radius: 28px;
-            margin: 28px 0 20px;
-            font-weight: 500;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: var(--shadow);
-        }
-        .skill-badge {
-            display: inline-block;
-            background: var(--text-main);
-            color: var(--bg-color);
-            border-radius: 40px;
-            padding: 6px 14px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Splash Screen -->
-    <div id="splash-screen">
-        <h1 id="splash-text" class="kavoon">AnshuRajhans 🫟</h1>
-    </div>
-
-    <!-- Header -->
-    <header>
-        <button class="icon-btn" onclick="toggleDrawer()">
-            <span class="material-symbols-rounded">menu</span>
-        </button>
-        <div class="header-title kavoon">AnshuRajhans 🫟</div>
-        <button class="icon-btn" onclick="toggleTheme()">
-            <span class="material-symbols-rounded" id="theme-icon">dark_mode</span>
-        </button>
-    </header>
-
-    <!-- Hamburger Drawer -->
-    <div id="drawer-overlay" onclick="toggleDrawer()"></div>
-    <div id="drawer">
-        <div class="kavoon" style="font-size: 1.5rem; margin-bottom: 20px;">AnshuRajhans</div>
-        <button class="drawer-item" onclick="navigate('home')"><span class="material-symbols-rounded">home</span> Home</button>
-        <button class="drawer-item" onclick="navigate('projects')"><span class="material-symbols-rounded">work</span> Projects</button>
-        <button class="drawer-item" onclick="navigate('education')"><span class="material-symbols-rounded">school</span> Education</button>
-        <button class="drawer-item" onclick="navigate('contact')"><span class="material-symbols-rounded">mail</span> Contact</button>
-        <button class="drawer-item" onclick="navigate('chatbot')"><span class="material-symbols-rounded">smart_toy</span> Chatbot</button>
-        <button class="drawer-item" onclick="navigate('settings')"><span class="material-symbols-rounded">settings</span> Settings</button>
-    </div>
-
-    <!-- Main Homepage Content -->
-    <main id="home-view">
-        <!-- Banner -->
-        <div class="banner">
-            <img src="banner.jpg" alt="Banner" onerror="handleImgError(this, 'var(--c-blue)')">
-        </div>
-
-        <!-- Bento Grid -->
-        <div class="bento-grid">
-            <button class="bento-card card-projects" onclick="navigate('projects')">
-                <span class="material-symbols-rounded card-icon">work</span>
-                <div class="card-title">Projects</div>
-                <div class="card-desc">GameHub & more — live projects that hit different.</div>
-            </button>
-            <button class="bento-card card-edu" onclick="navigate('education')">
-                <span class="material-symbols-rounded card-icon">school</span>
-                <div class="card-title">Education</div>
-                <div class="card-desc">SB Roy High School → Graduation (Pol Sci) + real talk: skills > degree.</div>
-            </button>
-            <button class="bento-card card-contact" onclick="navigate('contact')">
-                <span class="material-symbols-rounded card-icon">mail</span>
-                <div class="card-title">Contact</div>
-                <div class="card-desc">Get in touch via email or social.</div>
-            </button>
-            <button class="bento-card card-chatbot" onclick="navigate('chatbot')">
-                <span class="material-symbols-rounded card-icon">smart_toy</span>
-                <div class="card-title">AI Chatbot</div>
-                <div class="card-desc">Ask about portfolio, skills, or just vibe.</div>
-            </button>
-            <button class="bento-card card-settings" onclick="navigate('settings')">
-                <span class="material-symbols-rounded card-icon">settings</span>
-                <div class="card-title">Settings</div>
-                <div class="card-desc">App preferences.</div>
-            </button>
-            <button class="bento-card card-privacy" onclick="navigate('privacy')">
-                <span class="material-symbols-rounded card-icon">shield</span>
-                <div class="card-title">Privacy</div>
-                <div class="card-desc">Data policy.</div>
-            </button>
-            <button class="bento-card card-terms" onclick="navigate('terms')">
-                <span class="material-symbols-rounded card-icon">gavel</span>
-                <div class="card-title">Terms</div>
-                <div class="card-desc">Conditions of use.</div>
-            </button>
-            <button class="bento-card card-404" onclick="navigate('404')">
-                <span class="material-symbols-rounded card-icon">error</span>
-                <div class="card-title">404 Page</div>
-                <div class="card-desc">Test error handling.</div>
-            </button>
-        </div>
-    </main>
-
-    <!-- SPA Page Container -->
-    <div id="page-container">
-        <div class="page-header">
-            <button class="icon-btn" onclick="closePage()">
-                <span class="material-symbols-rounded">arrow_back</span>
-            </button>
-            <h2 id="page-header-title">Page</h2>
-        </div>
-        <div class="page-content" id="page-content">
-            <!-- Dynamic Content Injected Here -->
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        /* --- Initialization & Splash Screen --- */
-        document.addEventListener("DOMContentLoaded", () => {
-            try {
-                initTheme();
-                initPWA();
-                setTimeout(() => {
-                    hideSplash();
-                }, 2000);
-            } catch (e) {
-                console.warn("Initialization error", e);
-                hideSplash();
-            }
-            if (!navigator.onLine) showOfflineToast();
-        });
-        setTimeout(hideSplash, 3000);
-        function hideSplash() {
-            const splash = document.getElementById('splash-screen');
-            if (splash) {
-                splash.style.opacity = '0';
-                splash.style.visibility = 'hidden';
-            }
-        }
-
-        /* --- Theme Management --- */
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
-        }
-        function toggleTheme() {
-            const current = document.body.getAttribute('data-theme');
-            const newTheme = current === 'dark' ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        }
-        function updateThemeIcon(theme) {
-            document.getElementById('theme-icon').textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
-        }
-
-        function toggleDrawer() {
-            document.getElementById('drawer').classList.toggle('active');
-            document.getElementById('drawer-overlay').classList.toggle('active');
-        }
-
-        function handleImgError(img, colorVar) {
-            img.onerror = null;
-            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><rect width="100%" height="100%" fill="#e0e0e0"/><text x="50%" y="50%" fill="#888" font-family="sans-serif" font-size="14" text-anchor="middle" dominant-baseline="middle">✨ Banner</text></svg>`;
-            img.src = 'data:image/svg+xml;base64,' + btoa(svg);
-        }
-
-        /* --- Navigation & SPA Routing --- */
-        function navigate(pageId) {
-            if (pageId === 'home') {
-                closePage();
-                document.getElementById('drawer').classList.remove('active');
-                document.getElementById('drawer-overlay').classList.remove('active');
-                return;
-            }
-            const pageTitle = pageId.charAt(0).toUpperCase() + pageId.slice(1);
-            document.getElementById('page-header-title').textContent = pageTitle.replace('404', 'Error 404');
-            const contentDiv = document.getElementById('page-content');
-            contentDiv.innerHTML = pageRenders[pageId] ? pageRenders[pageId]() : pageRenders['404']();
-            document.getElementById('page-container').classList.add('active');
-            document.getElementById('drawer').classList.remove('active');
-            document.getElementById('drawer-overlay').classList.remove('active');
-            if (pageId === 'chatbot') initChatbot();
-        }
-        function closePage() {
-            document.getElementById('page-container').classList.remove('active');
-        }
-
-        /* --- Updated Page Renderers (Education + Projects GenZ style + Contact updated) --- */
-        const pageRenders = {
-            projects: () => `
-                <h1 class="page-title">🚀 Projects that slap</h1>
-                <p class="page-text">Real builds, real vibes. No cap — these are live & breathing.</p>
-                
-                <div class="list-card" style="flex-wrap: wrap;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; width: 100%;">
-                        <div style="background: var(--c-cyan); width: 80px; height: 80px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🎮</div>
-                        <div style="flex:1">
-                            <h3>GameHub 🔥</h3>
-                            <p class="card-desc" style="margin-top:4px;">Next-gen gaming community platform — smooth UI, modern stack, live now.</p>
-                            <a href="https://vipweb.shop/" target="_blank" rel="noopener noreferrer" class="primary-btn" style="padding: 8px 20px; margin-top: 12px; display: inline-block;">🌐 Visit GameHub →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="list-card" style="flex-wrap: wrap;">
-                    <div style="display: flex; gap: 16px; width: 100%; align-items: center;">
-                        <div style="background: var(--c-orange); width: 80px; height: 80px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🫟</div>
-                        <div>
-                            <h3>AnshuRajhans PWA</h3>
-                            <p class="card-desc">This very portfolio — offline-ready, themable, bento UI, AI chatbot. Pure flex.</p>
-                            <button class="outline-btn" style="margin-top: 10px;" onclick="toast('You already in it, bestie ✨')">Explore now</button>
-                        </div>
-                    </div>
-                </div>
-                <p class="page-text" style="font-size: 0.9rem; margin-top: 12px;">💡 More projects loading... stay tuned, fam.</p>
-            `,
-            education: () => `
-                <h1 class="page-title">📚 Edu timeline (real one)</h1>
-                <p class="page-text">Academic journey + a lil' reality check about web dev.</p>
-                
-                <div style="position: relative; padding-left: 24px; border-left: 3px solid var(--text-main);">
-                    <div style="margin-bottom: 32px;">
-                        <div style="position: absolute; left: -9px; width: 14px; height: 14px; background: var(--text-main); border-radius: 50%;"></div>
-                        <h3>🎓 Matriculation (10th)</h3>
-                        <p style="color: var(--text-sec); font-weight: 500;">SB Roy High School, Simran, Jharkhand</p>
-                        <p style="font-size:0.9rem;">Completed with excellence — foundation mode: ON.</p>
-                    </div>
-                    <div style="margin-bottom: 32px;">
-                        <div style="position: absolute; left: -9px; width: 14px; height: 14px; background: var(--text-main); border-radius: 50%;"></div>
-                        <h3>📖 Intermediate (12th)</h3>
-                        <p style="color: var(--text-sec);">SB Roy +2 School, Simran, Deoghar (JAC Ranchi)</p>
-                        <p style="font-size:0.9rem;">Higher secondary, laid the discipline.</p>
-                    </div>
-                    <div style="margin-bottom: 32px;">
-                        <div style="position: absolute; left: -9px; width: 14px; height: 14px; background: var(--text-main); border-radius: 50%;"></div>
-                        <h3>🏛️ Graduation</h3>
-                        <p style="color: var(--text-sec);">Deoghar College, Deoghar (SKMU, Dumka) — Political Science</p>
-                        <p style="font-size:0.9rem;">Degree in Pol Sci, but brain wired for code 🧠⚡</p>
-                    </div>
-                </div>
-                
-                <!-- Gen Z Style Skill > Degree Section -->
-                <div class="genz-quote">
-                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                        <span style="font-size: 2rem;">🧢</span>
-                        <div>
-                            <h3 style="font-weight: 800;">no cap: web dev doesn't need a degree.</h3>
-                            <p style="margin-top: 8px; font-weight: 500;">It needs <strong>skills</strong>, and i got 'em. Built this whole PWA, GameHub, and more — self-taught grind, real portfolio energy. <br> 
-                            <span style="display: inline-block; margin-top: 12px;">✨ Skill > Degree, periodt. ✨</span></p>
-                            <div style="margin-top: 12px;">
-                                <span class="skill-badge">⚡ HTML/CSS</span>
-                                <span class="skill-badge">🔥 JavaScript</span>
-                                <span class="skill-badge">📱 PWA Expert</span>
-                                <span class="skill-badge">🎨 UI/UX sense</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p class="page-text" style="font-size:0.85rem;">💅 degree in political science? yes. coding like a pro? also yes. no limits.</p>
-            `,
-            contact: () => `
-                <h1 class="page-title">👾 Slide into DMs</h1>
-                <p class="page-text">collab, freelance, or just wanna vibe — hmu.</p>
-                <div style="background: var(--header-bg); padding: 24px; border-radius: var(--card-radius); box-shadow: var(--shadow);">
-                    <h3>Anshu Rajhans</h3>
-                    <p style="margin: 10px 0; color: var(--text-sec);">
-                        <span class="material-symbols-rounded" style="vertical-align: middle;">mail</span> 
-                        <a href="mailto:vipwebff@gmail.com" style="color: var(--text-main); text-decoration: none; border-bottom: 1px dotted var(--text-sec);">vipwebff@gmail.com</a>
-                    </p>
-                    <p style="margin: 10px 0; color: var(--text-sec);">
-                        <span class="material-symbols-rounded" style="vertical-align: middle;">photo_camera</span> 
-                        <a href="https://instagram.com/anshurajhans" target="_blank" rel="noopener noreferrer" style="color: var(--text-main); text-decoration: none; border-bottom: 1px dotted var(--text-sec);">@anshurajhans</a>
-                    </p>
-                    <button class="primary-btn" onclick="window.open('https://instagram.com/anshurajhans', '_blank')">
-                        📸 Send a vibe → (Instagram)
-                    </button>
-                </div>
-            `,
-            settings: () => `
-                <h1 class="page-title">⚙️ Settings</h1>
-                <p class="page-text">Customize your experience.</p>
-                <div class="list-card" style="justify-content: space-between; cursor: pointer;" onclick="toggleTheme()">
-                    <div style="display:flex; align-items:center; gap:12px;"><span class="material-symbols-rounded">palette</span><h3>Dark/Light Mode</h3></div>
-                    <span class="material-symbols-rounded">chevron_right</span>
-                </div>
-                <div class="list-card" style="justify-content: space-between; cursor: pointer;" onclick="clearCache()">
-                    <div style="display:flex; align-items:center; gap:12px;"><span class="material-symbols-rounded">delete</span><h3>Clear Cache & Reset</h3></div>
-                </div>
-                <div class="list-card" style="justify-content: space-between; cursor: pointer;" onclick="promptInstall()">
-                    <div style="display:flex; align-items:center; gap:12px;"><span class="material-symbols-rounded">download</span><h3>Install as App (PWA)</h3></div>
-                </div>
-            `,
-            privacy: () => `
-                <h1 class="page-title">🔒 Privacy? Locked.</h1>
-                <p class="page-text">No data selling, no creepy tracking. Only localStorage for theme.</p>
-                <h3>Zero BS Policy</h3>
-                <p class="page-text">Everything stays on your device. This portfolio is 100% client-side.</p>
-            `,
-            terms: () => `
-                <h1 class="page-title">📜 Terms of use</h1>
-                <p class="page-text">Don't be weird, give credit if u steal code, and enjoy the vibes.</p>
-                <h3>Intellectual property</h3>
-                <p class="page-text">Built by Anshu Rajhans — inspired by minimalism & GenZ culture.</p>
-            `,
-            chatbot: () => `
-                <div class="chat-container">
-                    <div class="chat-messages" id="chat-messages">
-                        <div class="chat-bubble chat-bot">Yo! I'm Anshu's AI homie. Ask me about his skills, projects, or just say hi 👋</div>
-                    </div>
-                    <div class="chat-input-area">
-                        <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="handleChatKey(event)">
-                        <button class="icon-btn" style="background:var(--text-main); color:var(--bg-color);" onclick="sendChatMessage()">
-                            <span class="material-symbols-rounded">send</span>
-                        </button>
-                    </div>
-                </div>
-            `,
-            '404': () => `
-                <div class="center-msg">
-                    <h1>404</h1>
-                    <h2 style="margin-bottom:20px;">Page not found. maybe lost in the metaverse?</h2>
-                    <button class="primary-btn" onclick="closePage()">Go back home</button>
-                </div>
-            `
-        };
-
-        function toast(message) {
-            iziToast.show({
-                title: '',
-                message: message,
-                position: 'bottomCenter',
-                theme: document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light',
-                timeout: 2500
-            });
-        }
-
-        function clearCache() {
-            Swal.fire({
-                title: 'Clear cache?',
-                text: "This will reset theme and preferences.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, clear',
-                background: getComputedStyle(document.body).getPropertyValue('--bg-color'),
-                color: getComputedStyle(document.body).getPropertyValue('--text-main')
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    localStorage.clear();
-                    Swal.fire('Cleared!', 'App data reset. Reloading...', 'success').then(() => location.reload());
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: 'var(--color-brand)',
+                        cardBg: 'var(--color-cardBg)',
+                        darkCard: 'var(--color-darkCard)',
+                        accent: '#ffb900',
+                        textDim: 'var(--color-textDim)',
+                        textMain: 'var(--color-textMain)',
+                        bodyBg: 'var(--color-bodyBg)'
+                    },
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    boxShadow: { 'yellow-glow': '0 4px 20px rgba(255, 185, 0, 0.4)' }
                 }
-            });
-        }
-
-        /* Chatbot */
-        const botResponses = [
-            "Anshu's main flex: GameHub → vipweb.shop 🔥",
-            "He's self-taught, degree in Pol Sci but codes like a pro.",
-            "Bento UI, PWA ready, dark mode — all from scratch.",
-            "No cap, skills speak louder than degrees 💯",
-            "He did 10th & 12th from SB Roy, then Graduation from Deoghar College.",
-            "Ask about his projects! GameHub is live.",
-            "He believes: Skill > Degree, periodt.",
-            "Contact him via email vipwebff@gmail.com or IG @anshurajhans ✨"
-        ];
-        function initChatbot() { setTimeout(() => { let inp = document.getElementById('chat-input'); if(inp) inp.focus(); }, 200); }
-        function handleChatKey(e) { if (e.key === 'Enter') sendChatMessage(); }
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const msg = input.value.trim();
-            if(!msg) return;
-            appendChat(msg, 'user');
-            input.value = '';
-            setTimeout(() => {
-                const reply = botResponses[Math.floor(Math.random() * botResponses.length)];
-                appendChat(reply, 'bot');
-            }, 800);
-        }
-        function appendChat(text, sender) {
-            const container = document.getElementById('chat-messages');
-            if(!container) return;
-            const bubble = document.createElement('div');
-            bubble.className = `chat-bubble chat-${sender}`;
-            bubble.textContent = text;
-            container.appendChild(bubble);
-            container.scrollTop = container.scrollHeight;
-        }
-
-        /* PWA Manifest & Service Worker */
-        let deferredPrompt;
-        function initPWA() {
-            const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192"><rect width="192" height="192" fill="#1d1d1f"/><text x="96" y="105" font-family="sans-serif" font-size="80" fill="#ffffff" text-anchor="middle">🫟</text></svg>`;
-            const iconUrl = 'data:image/svg+xml;base64,' + btoa(iconSvg);
-            const manifest = {
-                name: "AnshuRajhans Dev",
-                short_name: "AnshuPortfolio",
-                start_url: ".",
-                display: "standalone",
-                background_color: "#ffffff",
-                theme_color: "#000000",
-                icons: [{ src: iconUrl, sizes: "192x192", type: "image/svg+xml" }]
-            };
-            const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-            document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
-            const swCode = `const CACHE='anshu-pwa-v2'; self.addEventListener('install',e=>self.skipWaiting()); self.addEventListener('activate',e=>e.waitUntil(clients.claim())); self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(f=>caches.open(CACHE).then(c=>{if(e.request.method==='GET')c.put(e.request,f.clone());return f;})))})});`;
-            const swBlob = new Blob([swCode], {type: 'application/javascript'});
-            if ('serviceWorker' in navigator) navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(e=>console.log);
-            window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
-            window.addEventListener('offline', showOfflineToast);
-            window.addEventListener('online', () => iziToast.success({title: 'Online', message: 'Back online!', position: 'bottomCenter'}));
-        }
-        function showOfflineToast() { iziToast.warning({title: 'Offline', message: 'You’re offline but app still works ✨', position: 'bottomCenter', timeout: 4000}); }
-        function promptInstall() {
-            if(deferredPrompt) {
-                Swal.fire({title: 'Install App?', text: 'Add to home screen for full PWA experience.', icon: 'info', showCancelButton: true, confirmButtonText: 'Install'}).then(res=>{
-                    if(res.isConfirmed){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; }); }
-                });
-            } else { Swal.fire('Already installed', 'PWA is ready or browser not supported', 'info'); }
+            }
         }
     </script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
+    <!-- IziToast -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --color-brand: #f14b40;
+            --color-cardBg: #e9453a;
+            --color-darkCard: #e03d32;
+            --color-textDim: rgba(255,255,255,0.7);
+            --color-textMain: #ffffff;
+            --color-bodyBg: #f14b40;
+        }
+        .dark {
+            --color-brand: #1a1a1a;
+            --color-cardBg: #242424;
+            --color-darkCard: #141414;
+            --color-textDim: rgba(255,255,255,0.5);
+            --color-textMain: #f3f4f6;
+            --color-bodyBg: #121212;
+        }
+        body {
+            background-color: var(--color-bodyBg);
+            color: var(--color-textMain);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .img-placeholder {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: #64748b; font-weight: 500; text-align: center;
+        }
+        .dark .img-placeholder {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            color: #9ca3af;
+        }
+        #three-canvas-container canvas {
+            outline: none;
+            cursor: grab;
+        }
+        #three-canvas-container canvas:active { cursor: grabbing; }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent selection:text-black pb-20 transition-colors duration-500">
+
+<div class="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 relative">
+
+    <!-- NAVIGATION -->
+    <nav class="flex items-center justify-between py-8">
+        <div class="bg-white text-bodyBg px-4 py-2 rounded-md flex items-center gap-2 font-black tracking-tight cursor-pointer transition-colors" onclick="showWelcomeToast()">
+            <div class="text-xl leading-none">.: AR</div>
+            <div class="text-[0.6rem] leading-tight text-left uppercase">ANSHU<br>RAJHANS</div>
+        </div>
+        <ul class="hidden md:flex gap-10 text-sm font-semibold uppercase tracking-wider text-textMain/90">
+            <li><a href="#" onclick="scrollToWorks(); return false;" class="hover:text-accent transition-colors">Works</a></li>
+            <li><a href="#" onclick="showInfoAlert(); return false;" class="hover:text-accent transition-colors">About</a></li>
+            <li><a href="#" onclick="showAwardVibes(); return false;" class="hover:text-accent transition-colors">Awards</a></li>
+        </ul>
+        <div class="flex gap-3 items-center">
+            <button id="theme-toggle" class="w-10 h-10 rounded-full bg-white/10 border border-white/30 flex items-center justify-center hover:bg-white hover:text-bodyBg transition-all transform hover:scale-105">
+                <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </button>
+            <div class="w-px h-6 bg-white/20 mx-2"></div>
+            <a href="https://github.com/kushmil" target="_blank" class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-bodyBg transition-colors"><i class="ph ph-github-logo text-lg"></i></a>
+            <a href="https://instagram.com/anshurajhans" target="_blank" class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-bodyBg transition-colors"><i class="ph ph-instagram-logo text-lg"></i></a>
+            <a href="mailto:vipwebff@gmail.com" class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-bodyBg transition-colors"><i class="ph ph-envelope-simple text-lg"></i></a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="flex flex-col lg:flex-row items-center mt-12 lg:mt-20 gap-12">
+        <div class="flex-1 w-full text-center lg:text-left z-10">
+            <span class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-4 block">Full-Stack Dev & Game Creator</span>
+            <h1 class="text-[5rem] sm:text-[7rem] lg:text-[8rem] font-black leading-[0.85] tracking-tighter mb-8 uppercase text-textMain shadow-sm">
+                Anshu<br>Rajhans
+            </h1>
+            <div class="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
+                <p class="text-textDim text-sm max-w-xs leading-relaxed text-center sm:text-left">
+                    🔥 11+ games shipped | PWA addict | HTML/CSS/JS beast. Degree is just a paper — my skills are built different.
+                </p>
+                <button onclick="showInfoAlert()" class="bg-white text-black rounded-full pl-6 pr-2 py-2 flex items-center gap-4 text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform">
+                    Learn More
+                    <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white"><i class="ph-fill ph-play"></i></div>
+                </button>
+            </div>
+        </div>
+        <div class="flex-1 w-full relative group">
+            <div id="three-canvas-container" class="relative w-full aspect-square max-w-[600px] mx-auto lg:ml-auto"></div>
+        </div>
+    </header>
+
+    <!-- PORTFOLIO CARDS (MY REAL PROJECTS) -->
+    <section id="works-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-32">
+        <!-- Card 1: VIPWEB.SHOP -->
+        <div class="bg-cardBg rounded-[2.5rem] p-6 pt-8 flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 border border-white/5">
+            <div class="flex justify-between items-start mb-6 px-2">
+                <div><span class="text-3xl font-black block leading-none mb-1 text-textMain">01</span><span class="text-xs text-textDim uppercase tracking-wider font-semibold">Gaming Hub</span></div>
+                <div class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center"><i class="ph ph-game-controller"></i></div>
+            </div>
+            <div class="bg-white rounded-2xl aspect-[4/3] mb-8 overflow-hidden img-placeholder group relative">
+                <i class="ph-duotone ph-joystick text-6xl text-bodyBg"></i>
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <button onclick="openProjectURL('vipweb')" class="bg-white text-bodyBg px-6 py-2 rounded-full font-bold text-sm">Play Now</button>
+                </div>
+            </div>
+            <div class="mt-auto">
+                <h3 class="text-3xl font-bold mb-3 text-textMain">VIPWEB.SHOP</h3>
+                <p class="text-sm text-textDim leading-relaxed mb-6 line-clamp-2">11+ original browser games, PWA-ready, leaderboards & smooth UI. Pure HTML/CSS/JS madness.</p>
+                <button onclick="openProjectURL('vipweb')" class="border border-white/30 text-textMain rounded-full pl-2 pr-6 py-2 flex items-center gap-3 text-xs font-bold uppercase tracking-wider hover:bg-white hover:text-bodyBg transition-colors w-max group">
+                    <div class="w-8 h-8 bg-white text-bodyBg rounded-full flex items-center justify-center group-hover:bg-bodyBg group-hover:text-white"><i class="ph-fill ph-play"></i></div>
+                    Play Games
+                </button>
+            </div>
+        </div>
+
+        <!-- Card 2: Anshu4u.xyz (Portfolio) -->
+        <div class="bg-cardBg rounded-[2.5rem] p-6 pt-8 flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 border border-white/5">
+            <div class="flex justify-between items-start mb-6 px-2">
+                <div><span class="text-3xl font-black block leading-none mb-1 text-textMain">02</span><span class="text-xs text-textDim uppercase tracking-wider font-semibold">Creative Lab</span></div>
+                <div class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center"><i class="ph ph-bezier-curve"></i></div>
+            </div>
+            <div class="bg-white rounded-2xl aspect-[4/3] mb-8 overflow-hidden img-placeholder group relative">
+                <i class="ph-duotone ph-cube text-6xl text-bodyBg"></i>
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <button onclick="openProjectURL('anshu4u')" class="bg-white text-bodyBg px-6 py-2 rounded-full font-bold text-sm">Explore</button>
+                </div>
+            </div>
+            <div class="mt-auto">
+                <h3 class="text-3xl font-bold mb-3 text-textMain">Anshu4u.xyz</h3>
+                <p class="text-xs text-textDim uppercase tracking-wider mb-4">Interactive 3D Portfolio</p>
+                <div class="flex gap-2 mb-6 text-[0.65rem] font-bold">
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-sm">Three.js</span>
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-sm">WebGL</span>
+                    <span class="bg-accent text-brand px-3 py-1 rounded-sm">CREATIVE</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="openProjectURL('anshu4u')" class="w-12 h-12 bg-white text-bodyBg rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <i class="ph-fill ph-play text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Groceries + Gy Project -->
+        <div class="bg-cardBg rounded-[2.5rem] p-6 pt-8 flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 border border-white/5">
+            <div class="flex justify-between items-start mb-6 px-2">
+                <div><span class="text-3xl font-black block leading-none mb-1 text-textMain">03</span><span class="text-xs text-textDim uppercase tracking-wider font-semibold">Smart Tools</span></div>
+                <div class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center"><i class="ph ph-shopping-cart"></i></div>
+            </div>
+            <div class="bg-white rounded-2xl aspect-[4/3] mb-8 overflow-hidden img-placeholder group relative">
+                <i class="ph-duotone ph-list-checks text-6xl text-bodyBg"></i>
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <button onclick="openProjectURL('gy')" class="bg-white text-bodyBg px-6 py-2 rounded-full font-bold text-sm">Live Demo</button>
+                </div>
+            </div>
+            <div class="mt-auto">
+                <h3 class="text-3xl font-bold mb-3 text-textMain">Groceries + Gy</h3>
+                <p class="text-xs text-textDim uppercase tracking-wider mb-4">LocalStorage PWA</p>
+                <div class="flex gap-2 mb-6 text-[0.65rem] font-bold">
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-sm">PWA</span>
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-sm">Offline-ready</span>
+                    <span class="bg-accent text-brand px-3 py-1 rounded-sm">GROCERIES</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="openProjectURL('gy')" class="w-12 h-12 bg-white text-bodyBg rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <i class="ph-fill ph-play text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONFERENCES & ACHIEVEMENTS (genZ style) -->
+    <section class="mt-32 max-w-4xl mx-auto">
+        <h2 class="text-4xl font-black text-center mb-8 text-textMain">✨ Flexes & Achievements ✨</h2>
+        <div class="flex justify-center gap-4 mb-12 text-sm font-bold">
+            <button class="px-6 py-2 rounded-full border border-textMain/30 text-textDim hover:bg-white/10 transition-colors">GAMES</button>
+            <button class="px-6 py-2 rounded-full bg-white text-bodyBg shadow-md">OPEN SOURCE</button>
+            <button class="px-6 py-2 rounded-full border border-textMain/30 text-textDim hover:bg-white/10 transition-colors">WEB APPS</button>
+        </div>
+        <div class="flex flex-col gap-3">
+            <div class="flex flex-col sm:flex-row items-center justify-between p-4 sm:px-8 border-b border-white/10 hover:bg-white/5 transition-colors rounded-xl cursor-pointer" onclick="showAchievementDetail('11+ original games on VIPWEB.SHOP')">
+                <div class="flex items-center gap-6 w-full sm:w-auto mb-4 sm:mb-0"><span class="text-sm font-bold text-textDim w-12">2025</span><div class="w-10 h-10 flex items-center justify-center text-accent"><i class="ph-fill ph-game-controller text-3xl"></i></div><h4 class="text-xl font-bold w-48 text-textMain">Game Dev Rampage</h4></div>
+                <div class="flex items-center gap-4 sm:gap-12 w-full sm:w-auto justify-between sm:justify-end text-sm text-textDim font-medium"><div class="flex items-center gap-2"><i class="ph ph-trophy"></i> 11+ titles shipped</div><i class="ph ph-caret-right text-textMain/30"></i></div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-between p-2 pl-4 sm:pl-8 bg-white text-black rounded-full shadow-lg cursor-pointer transform hover:scale-[1.02] transition-transform" onclick="showAchievementDetail('PWA certified & offline-first projects')">
+                <div class="flex items-center gap-6 w-full sm:w-auto mb-2 sm:mb-0"><span class="text-sm font-bold text-gray-400 w-12">2024</span><div class="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center"><i class="ph-fill ph-wrench text-2xl"></i></div><h4 class="text-xl font-bold w-48 text-bodyBg">PWA Mastery</h4></div>
+                <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto"><div class="flex items-center gap-2 text-sm text-gray-500 font-medium mr-4 sm:mr-12"><i class="ph ph-bezier-curve"></i> Offline-ready apps</div><div class="bg-accent rounded-full py-3 px-6 flex items-center gap-8 shadow-inner"><div class="flex items-center gap-2 text-sm font-bold text-brand"><i class="ph ph-star"></i> Installable Web Apps</div><i class="ph-fill ph-caret-right text-brand"></i></div></div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-between p-4 sm:px-8 border-b border-white/10 hover:bg-white/5 transition-colors rounded-xl cursor-pointer" onclick="showAchievementDetail('Graduated from Deoghar College, Deoghar · Degree just a paper, skills go brrr')">
+                <div class="flex items-center gap-6 w-full sm:w-auto mb-4 sm:mb-0"><span class="text-sm font-bold text-textDim w-12">2023</span><div class="w-10 h-10 flex items-center justify-center text-accent"><i class="ph-fill ph-graduation-cap text-3xl"></i></div><h4 class="text-xl font-bold w-48 text-textMain">B.Sc Graduate</h4></div>
+                <div class="flex items-center gap-4 sm:gap-12 w-full sm:w-auto justify-between sm:justify-end text-sm text-textDim font-medium"><div class="flex items-center gap-2"><i class="ph ph-identification-badge"></i> Deoghar College</div><i class="ph ph-caret-right text-textMain/30"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED HIGHLIGHT (MY PHOTO 16:9) -->
+    <section class="mt-32 bg-darkCard rounded-[3rem] p-8 lg:p-16 flex flex-col lg:flex-row items-center gap-12 overflow-hidden relative">
+        <div class="absolute right-0 top-0 bottom-0 w-1/2 opacity-10 pointer-events-none hidden lg:block"><svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 Q50,50 100,0 M0,20 Q50,70 100,20 M0,40 Q50,90 100,40" stroke="var(--color-textMain)" stroke-width="0.5" fill="none"/></svg></div>
+        <div class="flex-1 z-10">
+            <div class="bg-white text-bodyBg px-3 py-1.5 rounded-sm flex items-center gap-2 font-black tracking-tight w-max mb-12"><div class="text-lg leading-none">.: AR</div><div class="text-[0.5rem] leading-tight text-left uppercase">ANSHU<br>RAJHANS</div></div>
+            <h2 class="text-4xl lg:text-5xl font-black leading-tight mb-6 text-textMain">💻 Code. Create.<br>Dominate.</h2>
+            <div class="w-12 h-1 bg-white/30 mb-6"></div>
+            <p class="text-textDim text-sm max-w-sm mb-10 leading-relaxed">"Degree is just a paper — my skills are: 11+ games, PWA wizardry, Three.js, and building stuff that actually slaps."</p>
+            <button onclick="window.open('https://vipweb.shop','_blank')" class="bg-white text-black rounded-full pl-2 pr-6 py-2 flex items-center gap-4 text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform w-max"><div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white"><i class="ph-fill ph-play"></i></div>Play My Games</button>
+        </div>
+        <div class="flex-1 w-full bg-white rounded-3xl overflow-hidden shadow-2xl z-10 aspect-[16/9] relative group cursor-pointer" onclick="window.open('https://kushmil.github.io','_blank')">
+            <img src="myimage.jpg" alt="Anshu Rajhans - dev and game creator" class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500" onerror="this.src='https://placehold.co/800x450/ffb900/1a1a1a?text=Anshu+Rajhans+Photo'; this.onerror=null;">
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"><span class="bg-white/90 text-black px-4 py-2 rounded-full text-sm font-bold">✨ view profile ✨</span></div>
+        </div>
+    </section>
+
+    <!-- AWARDS SECTION (with personal flex) -->
+    <section class="mt-32 flex flex-col lg:flex-row gap-8">
+        <div class="w-full lg:w-48 flex flex-row lg:flex-col justify-between mb-8 lg:mb-0"><div><span class="text-textDim text-sm font-bold block mb-2">No 1 / 3</span><h2 class="text-4xl font-black leading-tight text-textMain">My<br>Flexes</h2></div><div class="flex gap-2 lg:mt-auto"><button class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-bodyBg transition-colors"><i class="ph ph-caret-left"></i></button><button class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-bodyBg transition-colors"><i class="ph ph-caret-right"></i></button></div></div>
+        <div class="flex-1 rounded-[2.5rem] border-2 border-white/20 p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-white/50 transition-colors">
+            <div class="absolute top-6 block w-full text-center"><span class="bg-white/10 text-xs px-4 py-1 rounded-full text-textMain/70">🏆 2024</span></div>
+            <div class="w-24 h-24 rounded-full border-[6px] border-textMain flex items-center justify-center mb-6 mt-12 group-hover:scale-110 transition-transform"><div class="w-16 h-16 rounded-full border-[4px] border-textMain flex items-center justify-center"><i class="ph-bold ph-game-controller text-4xl text-textMain"></i></div></div>
+            <h3 class="text-3xl font-bold mb-4 text-textMain">Game Dev<br>Of The Year</h3>
+            <p class="text-xs text-textDim max-w-xs mb-8">11+ interactive games, viral on VIPWEB.SHOP — recognized for pure coding flex.</p>
+            <button onclick="window.open('https://vipweb.shop','_blank')" class="bg-white text-black rounded-full pl-2 pr-6 py-2 flex items-center gap-3 text-xs font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors"><div class="w-8 h-8 bg-brand rounded-full flex items-center justify-center text-white"><i class="ph-fill ph-play"></i></div>Play Now</button>
+        </div>
+        <div class="flex-1 grid grid-cols-2 gap-4">
+            <div class="bg-white/5 rounded-[2rem] p-6 flex flex-col items-center justify-center text-center hover:bg-white/10 transition-colors cursor-pointer text-textMain" onclick="showAwardVibes()"><div class="w-16 h-16 mb-4 flex items-center justify-center"><i class="ph-fill ph-stack text-5xl opacity-80"></i></div><h4 class="text-sm font-bold mb-4 h-10 flex items-center">PWA Master</h4><span class="border border-white/30 text-[0.6rem] px-3 py-1 rounded-md opacity-50">2024</span></div>
+            <div class="bg-white/5 rounded-[2rem] p-6 flex flex-col items-center justify-center text-center hover:bg-white/10 transition-colors cursor-pointer text-textMain" onclick="showAwardVibes()"><div class="w-16 h-16 mb-4 flex items-center justify-center"><i class="ph-fill ph-github-logo text-5xl opacity-80"></i></div><h4 class="text-sm font-bold mb-4 h-10 flex items-center">Open Source Flex</h4><span class="border border-white/30 text-[0.6rem] px-3 py-1 rounded-md opacity-50">2025</span></div>
+        </div>
+    </section>
+
+    <!-- PRE-FOOTER SOCIALS (real links) -->
+    <div class="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-textMain">
+        <h2 class="text-4xl lg:text-5xl font-black">Catch me<br>on the grid:</h2>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://github.com/kushmil" target="_blank" class="w-14 h-14 rounded-2xl border-2 border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><i class="ph ph-github-logo text-3xl"></i></a>
+            <div class="relative cursor-pointer" onclick="window.open('https://instagram.com/anshurajhans','_blank')"><a href="#" class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-500 text-white flex items-center justify-center shadow-lg transform -translate-y-2"><i class="ph-fill ph-instagram-logo text-3xl"></i></a><div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-2 h-2 bg-white rounded-full hidden lg:block"></div></div>
+            <a href="https://vipweb.shop" target="_blank" class="w-14 h-14 rounded-2xl border-2 border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><i class="ph ph-game-controller text-3xl"></i></a>
+            <a href="mailto:vipwebff@gmail.com" class="w-14 h-14 rounded-2xl border-2 border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><i class="ph ph-envelope-simple text-3xl"></i></a>
+            <a href="https://kushmil.github.io" target="_blank" class="w-14 h-14 rounded-2xl border-2 border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><i class="ph ph-bezier-curve text-3xl"></i></a>
+        </div>
+    </div>
+
+    <footer class="mt-20 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="bg-white text-bodyBg px-3 py-1 rounded-sm flex items-center gap-2 font-black tracking-tight opacity-80 hover:opacity-100 transition-opacity cursor-pointer" onclick="showWelcomeToast()"><div class="text-lg leading-none">.: AR</div><div class="text-[0.5rem] leading-tight text-left uppercase">ANSHU<br>RAJHANS</div></div>
+        <ul class="flex flex-wrap justify-center gap-6 text-xs font-bold uppercase tracking-widest text-textDim"><li><a href="#" onclick="scrollToWorks();return false;" class="hover:text-textMain">Works</a></li><li><a href="#" onclick="showInfoAlert();return false;" class="hover:text-textMain">About</a></li><li><a href="#" onclick="showAwardVibes();return false;" class="hover:text-textMain">Awards</a></li><li><a href="mailto:vipwebff@gmail.com" class="hover:text-textMain">Contact</a></li></ul>
+        <div class="text-[0.6rem] text-right text-textDim uppercase tracking-widest leading-relaxed">2025 | Anshu Rajhans<br>code > degree</div>
+    </footer>
+</div>
+
+<script>
+    // PWA Manifest
+    const manifestData = { name: "Anshu Rajhans Dev Hub", short_name: "Anshu", start_url: ".", display: "standalone", background_color: "#f14b40", theme_color: "#f14b40", icons: [{ src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2YxNGI0MCIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BUjwvdGV4dD48L3N2Zz4=", sizes: "192x192 512x512", type: "image/svg+xml" }] };
+    document.getElementById('pwa-manifest').href = URL.createObjectURL(new Blob([JSON.stringify(manifestData)], {type: 'application/json'}));
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register(URL.createObjectURL(new Blob([`const CACHE_NAME='ar-port-v2'; self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE_NAME))); self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`], {type:'application/javascript'}))).catch(()=>{}); }
+
+    // Theme & Utilities
+    const themeToggle = document.getElementById('theme-toggle'), themeIcon = document.getElementById('theme-icon'), metaTheme = document.getElementById('meta-theme-color');
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    themeToggle.addEventListener('click', () => { document.documentElement.classList.toggle('dark'); const isDark = document.documentElement.classList.contains('dark'); localStorage.theme = isDark ? 'dark' : 'light'; updateThemeIcon(isDark); iziToast.show({ title: 'Theme', message: `${isDark ? 'Dark' : 'Light'} mode activated`, position: 'bottomCenter', timeout: 2000 }); });
+    function updateThemeIcon(isDark) { if(isDark) { themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`; metaTheme.setAttribute('content','#121212'); } else { themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`; metaTheme.setAttribute('content','#f14b40'); } }
+    function showWelcomeToast() { iziToast.show({ theme: 'dark', title: 'Anshu Rajhans', message: 'Welcome to my dev universe! 💻', backgroundColor: '#ffb900', titleColor: '#000', messageColor: '#000', timeout: 3000 }); }
+    function showInfoAlert() { Swal.fire({ title: '⚡ Anshu Rajhans', html: `<p>Graduated from <strong>Deoghar College, Deoghar</strong>. Degree? just a paper.<br>🔥 My skills: 11+ games, PWA expert, Three.js, HTML/CSS/JS, grocery web apps, and building digital experiences that hit different.<br><span class="text-accent">“code slaps harder than a degree”</span></p>`, icon: 'info', confirmButtonText: 'vibe accepted', customClass: { confirmButton: 'bg-accent text-black px-6 py-2 rounded-full font-bold' } }); }
+    function openProjectURL(type) { if(type === 'vipweb') window.open('https://vipweb.shop','_blank'); else if(type === 'anshu4u') window.open('https://anshu4u.xyz','_blank'); else if(type === 'gy') window.open('https://kushmil.github.io/Gy/','_blank'); else window.open('https://kushmil.github.io','_blank'); }
+    function showAchievementDetail(msg) { iziToast.info({ title: '✨ flex', message: msg, position: 'topCenter', timeout: 3000 }); }
+    function showAwardVibes() { Swal.fire({ title: '🏆 my flex collection', text: 'Game dev awards, PWA recognitions, open source contributions — building is my real degree.', icon: 'success', confirmButtonText: 'lessgo', background: '#1f1f1f', color: '#fff' }); }
+    function scrollToWorks() { document.getElementById('works-section')?.scrollIntoView({ behavior: 'smooth' }); }
+
+    // --- THREE.JS (fully functional with drag & auto-rotate) ---
+    const container3d = document.getElementById('three-canvas-container');
+    const scene = new THREE.Scene();
+    const aspect = container3d.clientWidth / container3d.clientHeight;
+    const camera = new THREE.OrthographicCamera(-2.5 * aspect, 2.5 * aspect, 2.5, -2.5, 1, 100);
+    camera.position.set(20, 20, 20);
+    camera.lookAt(0,0,0);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container3d.clientWidth, container3d.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container3d.appendChild(renderer.domElement);
+
+    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
+    dirLight.position.set(10,20,5);
+    scene.add(ambient, dirLight);
+    const group = new THREE.Group();
+    const matWhite = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.1, metalness: 0.2 });
+    const matYellow = new THREE.MeshStandardMaterial({ color: 0xffb900, roughness: 0.2 });
+    const matDark = new THREE.MeshStandardMaterial({ color: 0x333333, roughness: 0.4 });
+    const boxGeo = new THREE.BoxGeometry(1,1,1);
+    const cubes = [
+        { p: [0,0,0], s: [2,0.5,2], m: matWhite }, { p: [0,0.5,0], s: [1.5,0.5,1.5], m: matYellow }, { p: [-0.5,1,0.5], s: [0.5,1,0.5], m: matWhite },
+        { p: [0.5,1,-0.5], s: [0.5,1,0.5], m: matDark }, { p: [0,1.5,0], s: [1,0.2,1], m: matWhite }, { p: [1.5,1,1.5], s: [0.3,0.3,0.3], m: matYellow },
+        { p: [-1.5,0,-1.5], s: [0.4,0.4,0.4], m: matWhite }
+    ];
+    cubes.forEach(data => { const mesh = new THREE.Mesh(boxGeo, data.m); mesh.position.set(...data.p); mesh.scale.set(...data.s); const edges = new THREE.EdgesGeometry(boxGeo); const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000, opacity: 0.15, transparent: true })); mesh.add(line); group.add(mesh); });
+    scene.add(group);
+
+    let autoRotate = true, rotating = false, startX = 0, startY = 0, rotX = 0, rotY = 0, targetRotX = 0, targetRotY = 0;
+    container3d.addEventListener('mousedown', (e) => { autoRotate = false; rotating = true; startX = e.clientX; startY = e.clientY; rotX = group.rotation.x; rotY = group.rotation.y; container3d.style.cursor = 'grabbing'; });
+    window.addEventListener('mousemove', (e) => { if(rotating) { let dx = e.clientX - startX, dy = e.clientY - startY; group.rotation.x = rotX + dy * 0.008; group.rotation.y = rotY + dx * 0.008; } });
+    window.addEventListener('mouseup', () => { rotating = false; container3d.style.cursor = 'grab'; setTimeout(() => { if(!rotating) autoRotate = true; }, 2000); });
+    container3d.addEventListener('touchstart', (e) => { autoRotate = false; rotating = true; startX = e.touches[0].clientX; startY = e.touches[0].clientY; rotX = group.rotation.x; rotY = group.rotation.y; });
+    window.addEventListener('touchmove', (e) => { if(rotating) { let dx = e.touches[0].clientX - startX, dy = e.touches[0].clientY - startY; group.rotation.x = rotX + dy * 0.008; group.rotation.y = rotY + dx * 0.008; } });
+    window.addEventListener('touchend', () => { rotating = false; setTimeout(() => { if(!rotating) autoRotate = true; }, 2000); });
+
+    function animate() { requestAnimationFrame(animate); if(autoRotate && !rotating) { group.rotation.y += 0.005; group.rotation.x += 0.001; } renderer.render(scene, camera); }
+    animate();
+    window.addEventListener('resize', () => { const newAspect = container3d.clientWidth / container3d.clientHeight; camera.left = -2.5 * newAspect; camera.right = 2.5 * newAspect; camera.top = 2.5; camera.bottom = -2.5; camera.updateProjectionMatrix(); renderer.setSize(container3d.clientWidth, container3d.clientHeight); });
+    setTimeout(() => iziToast.info({ title: '🔥 3D flex', message: 'Drag the geometric beast & vibe with me', position: 'topRight', timeout: 4500 }), 1800);
+</script>
 </body>
 </html>
