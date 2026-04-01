@@ -222,6 +222,62 @@
                 </div>
             </div>
         </div>
+
+        <!-- Card 4: Play.anshu4u.xyz (Gaming) -->
+        <div class="bg-cardBg rounded-[2.5rem] p-6 pt-8 flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 border border-white/5">
+            <div class="flex justify-between items-start mb-6 px-2">
+                <div><span class="text-3xl font-black block leading-none mb-1 text-textMain">04</span><span class="text-xs text-textDim uppercase tracking-wider font-semibold">Web Games</span></div>
+                <div class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center"><i class="ph ph-sword"></i></div>
+            </div>
+            <div class="bg-white rounded-2xl aspect-[4/3] mb-8 overflow-hidden img-placeholder group relative">
+                <i class="ph-duotone ph-game-controller text-6xl text-bodyBg"></i>
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <button onclick="openProjectURL('play')" class="bg-white text-bodyBg px-6 py-2 rounded-full font-bold text-sm">Play Now</button>
+                </div>
+            </div>
+            <div class="mt-auto">
+                <h3 class="text-3xl font-bold mb-3 text-textMain">Play.anshu4u</h3>
+                <p class="text-xs text-textDim uppercase tracking-wider mb-4">Gaming Portal</p>
+                <div class="flex gap-2 mb-6 text-[0.65rem] font-bold">
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-sm">Games</span>
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-sm">JS</span>
+                    <span class="bg-accent text-brand px-3 py-1 rounded-sm">FUN</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="openProjectURL('play')" class="w-12 h-12 bg-white text-bodyBg rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <i class="ph-fill ph-play text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5: AI.anshu4u.xyz (AI Project) -->
+        <div class="bg-cardBg rounded-[2.5rem] p-6 pt-8 flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 border border-white/5">
+            <div class="flex justify-between items-start mb-6 px-2">
+                <div><span class="text-3xl font-black block leading-none mb-1 text-textMain">05</span><span class="text-xs text-textDim uppercase tracking-wider font-semibold">AI Magic</span></div>
+                <div class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center"><i class="ph ph-brain"></i></div>
+            </div>
+            <div class="bg-white rounded-2xl aspect-[4/3] mb-8 overflow-hidden img-placeholder group relative">
+                <i class="ph-duotone ph-robot text-6xl text-bodyBg"></i>
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <button onclick="openProjectURL('ai')" class="bg-white text-bodyBg px-6 py-2 rounded-full font-bold text-sm">Try AI</button>
+                </div>
+            </div>
+            <div class="mt-auto">
+                <h3 class="text-3xl font-bold mb-3 text-textMain">AI.anshu4u</h3>
+                <p class="text-xs text-textDim uppercase tracking-wider mb-4">AI Powered Web</p>
+                <div class="flex gap-2 mb-6 text-[0.65rem] font-bold">
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-sm">AI</span>
+                    <span class="bg-accent/20 text-accent px-3 py-1 rounded-sm">Smart</span>
+                    <span class="bg-accent text-brand px-3 py-1 rounded-sm">TECH</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="openProjectURL('ai')" class="w-12 h-12 bg-white text-bodyBg rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                        <i class="ph-fill ph-play text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- CONFERENCES & ACHIEVEMENTS (genZ style) -->
@@ -312,7 +368,10 @@
     function updateThemeIcon(isDark) { if(isDark) { themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`; metaTheme.setAttribute('content','#121212'); } else { themeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`; metaTheme.setAttribute('content','#f14b40'); } }
     function showWelcomeToast() { iziToast.show({ theme: 'dark', title: 'Anshu Rajhans', message: 'Welcome to my dev universe! 💻', backgroundColor: '#ffb900', titleColor: '#000', messageColor: '#000', timeout: 3000 }); }
     function showInfoAlert() { Swal.fire({ title: '⚡ Anshu Rajhans', html: `<p>Graduated from <strong>Deoghar College, Deoghar</strong>. Degree? just a paper.<br>🔥 My skills: 11+ games, PWA expert, Three.js, HTML/CSS/JS, grocery web apps, and building digital experiences that hit different.<br><span class="text-accent">“code slaps harder than a degree”</span></p>`, icon: 'info', confirmButtonText: 'vibe accepted', customClass: { confirmButton: 'bg-accent text-black px-6 py-2 rounded-full font-bold' } }); }
-    function openProjectURL(type) { if(type === 'vipweb') window.open('https://vipweb.shop','_blank'); else if(type === 'anshu4u') window.open('https://anshu4u.xyz','_blank'); else if(type === 'gy') window.open('https://kushmil.github.io/Gy/','_blank'); else window.open('https://kushmil.github.io','_blank'); }
+    
+    // UPDATED FUNCTION: added handlers for 'play' and 'ai'
+    function openProjectURL(type) { if(type === 'vipweb') window.open('https://vipweb.shop','_blank'); else if(type === 'anshu4u') window.open('https://anshu4u.xyz','_blank'); else if(type === 'gy') window.open('https://kushmil.github.io/Gy/','_blank'); else if(type === 'play') window.open('https://play.anshu4u.xyz','_blank'); else if(type === 'ai') window.open('https://ai.anshu4u.xyz','_blank'); else window.open('https://kushmil.github.io','_blank'); }
+    
     function showAchievementDetail(msg) { iziToast.info({ title: '✨ flex', message: msg, position: 'topCenter', timeout: 3000 }); }
     function showAwardVibes() { Swal.fire({ title: '🏆 my flex collection', text: 'Game dev awards, PWA recognitions, open source contributions — building is my real degree.', icon: 'success', confirmButtonText: 'lessgo', background: '#1f1f1f', color: '#fff' }); }
     function scrollToWorks() { document.getElementById('works-section')?.scrollIntoView({ behavior: 'smooth' }); }
